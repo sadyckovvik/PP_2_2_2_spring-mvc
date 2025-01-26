@@ -1,13 +1,14 @@
 package web.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
+//позволяет полностью отказаться от XML-конфигурации web.xml
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     // Метод, указывающий на класс конфигурации
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return null; // Корневой контекст не используется
+        //В этом случае все бины будут загружены в контекст DispatcherServlet.
     }
 
 
@@ -15,7 +16,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class<?>[]{
-                WebConfig.class
+                WebConfig.class // Конфигурация для DispatcherServlet
         };
     }
 
@@ -23,7 +24,7 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     /* Данный метод указывает url, на котором будет базироваться приложение */
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[]{"/"}; // Обрабатывать все запросы
     }
 
 }
