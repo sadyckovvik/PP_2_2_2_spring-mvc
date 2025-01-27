@@ -1,6 +1,8 @@
 package web.models;
 
 
+import java.util.Objects;
+
 public class Car {
 
     private int id;
@@ -35,5 +37,17 @@ public class Car {
 
     public void setEngine(String engine) {
         this.engine = engine;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return id == car.id && Objects.equals(model, car.model) && Objects.equals(engine, car.engine);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, model, engine);
     }
 }

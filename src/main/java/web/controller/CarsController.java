@@ -15,9 +15,13 @@ public class CarsController {
     @Autowired
     private CarService carService;
 
-    @GetMapping()
+    @GetMapping
     public String getCar(@RequestParam(required = false) Integer count, Model model) {
-        model.addAttribute("cars", carService.getCar(count));
+        if (count != null && count < 5) {
+            model.addAttribute("cars", carService.getCar(count));
+        } else {
+            model.addAttribute("cars", carService.getAllCar());
+        }
         return "cars";
     }
 }
